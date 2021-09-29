@@ -8,9 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.parliamentmembers.databinding.FragmentPartyBinding
@@ -48,11 +51,11 @@ class PartyFragment : Fragment() {
 
         viewModel.getParties().observe(viewLifecycleOwner, Observer {
 
-            for(member in it){
+            for (member in it) {
                 parties.add(member)
             }
 
-            for(party in parties){
+            for (party in parties) {
                 var partyImg = when (party) {
                     "kok" -> R.drawable.kok
                     "sd" -> R.drawable.sdp
@@ -68,35 +71,36 @@ class PartyFragment : Fragment() {
                 }
                 var partyName = when (party) {
                     "kok" -> R.string.kok_name
-                    "sd" ->  R.string.sd_name
+                    "sd" -> R.string.sd_name
                     "kesk" -> R.string.kesk_name
                     "ps" -> R.string.ps_name
                     "vihr" -> R.string.vihr_name
                     "vas" -> R.string.vas_name
-                    "r" ->  R.string.r_name
+                    "r" -> R.string.r_name
                     "kd" -> R.string.kd_name
                     "liik" -> R.string.liik_name
                     "vkk" -> R.string.vkk_name
                     else -> R.string.vkk_name
                 }
-                var partyImageViewData=PartyImageViewData(partyImg,partyName)
+                var partyImageViewData = PartyImageViewData(partyImg, partyName)
 
                 partyImageList.add(partyImageViewData)
+
+            }
+            fun recyclerViewItemClicked(item: PartyImageViewData, ) {
+
+                Log.d("#####", "Clicked: "+item.partyName)
+                this.findNavController().navigate(R.id.action_partyFragment_to_partyMembersFragment)
 
             }
 
             binding.partyRecyclerView.layoutManager = LinearLayoutManager(view?.context)
 
-            binding.partyRecyclerView.adapter = MyRecyclerViewAdapter(partyImageList)
-
-
-
+            binding.partyRecyclerView.adapter = MyRecyclerViewAdapter(partyImageList,
+                    {item: PartyImageViewData-> recyclerViewItemClicked(item)})
 
 
         })
-
-
-
         return binding.root
     }
 
@@ -105,17 +109,21 @@ class PartyFragment : Fragment() {
     //https://guides.codepath.com/android/using-the-recyclerview
 
     class MyRecyclerViewAdapter(
-            private val partyList: List<PartyImageViewData>
+            private val partyList: List<PartyImageViewData>, private val clickListener: (PartyImageViewData)->Unit
     ) :
             RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>() {
 
         inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+                fun bind(partyImageViewData: PartyImageViewData, clickListener: (PartyImageViewData) -> Unit) {
 
+                    val partyNameView = itemView.findViewById<TextView>(R.id.partyText)
+                    partyNameView.setText(partyImageViewData.partyName)
 
-                val partyNameView=itemView.findViewById<TextView>(R.id.partyText)
+                    val partyLogoView = itemView.findViewById<ImageView>(R.id.partyLogoView)
+                    partyLogoView.setImageResource(partyImageViewData.partyLogo)
 
-                val partyPic=itemView.findViewById<ImageView>(R.id.partyLogoView)
-
+                    itemView.setOnClickListener{clickListener(partyImageViewData)}
+                }
 
         }
 
@@ -133,9 +141,10 @@ class PartyFragment : Fragment() {
         }
 
         override fun onBindViewHolder(viewHolder: MyRecyclerViewAdapter.ViewHolder, position: Int) {
+            viewHolder.bind(partyList[position], clickListener)
 
-            val partyData=partyList.get(position)
-
+            //val partyData=partyList.get(position)
+    /*
             val partyNameView= viewHolder.partyNameView
             partyNameView.setText(partyData.partyName)
 
@@ -144,7 +153,7 @@ class PartyFragment : Fragment() {
 
 
 
-            /*vh.itemView.findViewById<TextView>(R.id.partyText).text =
+            vh.itemView.findViewById<TextView>(R.id.partyText).text =
                     myList[pos]*/
         }
 
