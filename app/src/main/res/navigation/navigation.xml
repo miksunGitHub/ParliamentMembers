@@ -9,5 +9,14 @@
         android:id="@+id/partyFragment"
         android:name="com.example.parliamentmembers.PartyFragment"
         android:label="fragment_party"
-        tools:layout="@layout/fragment_party" />
+        tools:layout="@layout/fragment_party" >
+        <action
+            android:id="@+id/action_partyFragment_to_partyMembersFragment"
+            app:destination="@id/partyMembersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/partyMembersFragment"
+        android:name="com.example.parliamentmembers.PartyMembersFragment"
+        android:label="fragment_party_members"
+        tools:layout="@layout/fragment_party_members" />
 </navigation>

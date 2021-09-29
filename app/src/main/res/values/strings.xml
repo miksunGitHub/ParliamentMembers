@@ -3,4 +3,20 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button">Button</string>
+    <string name="party">party</string>
+    <string name="choose_a_party">Choose a party</string>
+    <string name="party_logo">Party logo</string>
+    <string name="partyLogo">party logo</string>
+    <string name="kok_name">National Coalition Party</string>
+    <string name="sd_name">"Social Democratic Party"</string>
+    <string name="ps_name">"Finns Party"</string>
+    <string name="kesk_name">"Centre Party"</string>
+    <string name="vihr_name">"Green League"</string>
+    <string name="vas_name">"Left Alliance"</string>
+    <string name="r_name">"SwedishPeople´s Party"</string>
+    <string name="kd_name">"Christian Democrats"</string>
+    <string name="liik_name">"Movement Now"</string>
+    <string name="vkk_name">"Power Belongs to the People"</string>
+
+
 </resources>
