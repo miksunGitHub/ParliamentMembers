@@ -12,11 +12,9 @@ class PartyViewModel(private val repository: Repository): ViewModel() {
         val parliamentMemberData: LiveData<List<ParliamentMemberJsonData>>
                 get()=_parliamentMemberData
 
-
         init{
-                _parliamentMemberData.value=repository.getData(viewModelScope).value
+                _parliamentMemberData.value=repository.fetchData(viewModelScope).value
         }
 
-        fun getParties()=repository.getParties()
-
+        val partyList=Transformations.map(repository.getParties()){ it.distinct()}
 }

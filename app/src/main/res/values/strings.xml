@@ -17,6 +17,14 @@
     <string name="kd_name">"Christian Democrats"</string>
     <string name="liik_name">"Movement Now"</string>
     <string name="vkk_name">"Power Belongs to the People"</string>
+    <string name="partyID">partyID</string>
+    <string name="info">info</string>
+    <string name="last">last</string>
+    <string name="first">first</string>
+    <string name="face_pic">face pic</string>
+    <string name="constituency">constituency</string>
+    <string name="age">age</string>
+    <string name="rate_pm">Rate PM</string>
 
 
 </resources>

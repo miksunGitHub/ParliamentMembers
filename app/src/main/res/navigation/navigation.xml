@@ -18,5 +18,21 @@
         android:id="@+id/partyMembersFragment"
         android:name="com.example.parliamentmembers.PartyMembersFragment"
         android:label="fragment_party_members"
-        tools:layout="@layout/fragment_party_members" />
+        tools:layout="@layout/fragment_party_members" >
+        <argument
+            android:name="partyID"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_partyMembersFragment_to_memberFragment"
+            app:destination="@id/memberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memberFragment"
+        android:name="com.example.parliamentmembers.MemberFragment"
+        android:label="fragment_member"
+        tools:layout="@layout/fragment_member" >
+        <argument
+            android:name="memberID"
+            app:argType="integer" />
+    </fragment>
 </navigation>

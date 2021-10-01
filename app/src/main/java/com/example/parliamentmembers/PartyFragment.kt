@@ -1,5 +1,6 @@
 package com.example.parliamentmembers
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,20 +19,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.parliamentmembers.databinding.FragmentPartyBinding
 import com.example.parliamentmembers.utilities.InjectorUtils
-import kotlinx.android.synthetic.main.fragment_party.*
+
 
 
 class PartyFragment : Fragment() {
-
-    private val mydata = (100..140).map { it.toString() }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
 
         val binding: FragmentPartyBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_party, container, false)
@@ -49,13 +45,9 @@ class PartyFragment : Fragment() {
 
         var partyImageList= mutableListOf<PartyImageViewData>()
 
-        viewModel.getParties().observe(viewLifecycleOwner, Observer {
+        viewModel.partyList.observe(viewLifecycleOwner, Observer {
 
-            for (member in it) {
-                parties.add(member)
-            }
-
-            for (party in parties) {
+            for (party in it) {
                 var partyImg = when (party) {
                     "kok" -> R.drawable.kok
                     "sd" -> R.drawable.sdp
@@ -82,16 +74,14 @@ class PartyFragment : Fragment() {
                     "vkk" -> R.string.vkk_name
                     else -> R.string.vkk_name
                 }
-                var partyImageViewData = PartyImageViewData(partyImg, partyName)
+                var partyImageViewData = PartyImageViewData(party, partyImg, partyName)
 
                 partyImageList.add(partyImageViewData)
 
             }
             fun recyclerViewItemClicked(item: PartyImageViewData, ) {
 
-                Log.d("#####", "Clicked: "+item.partyName)
-                this.findNavController().navigate(R.id.action_partyFragment_to_partyMembersFragment)
-
+                this.findNavController().navigate(PartyFragmentDirections.actionPartyFragmentToPartyMembersFragment(item.party))
             }
 
             binding.partyRecyclerView.layoutManager = LinearLayoutManager(view?.context)
