@@ -25,6 +25,10 @@
     <string name="constituency">constituency</string>
     <string name="age">age</string>
     <string name="rate_pm">Rate PM</string>
+    <string name="rate">Rate</string>
+    <string name="rate_member">Rate member</string>
+    <string name="save">Save</string>
+    <string name="test">Test</string>
 
 
 </resources>

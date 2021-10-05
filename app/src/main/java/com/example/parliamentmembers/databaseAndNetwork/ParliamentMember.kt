@@ -13,6 +13,7 @@ data class ParliamentMember(
     var party: String,
     var constituency: String,
     var minister: Boolean,
-    var rating: Int,
-    var review: String
-)
+    var rating: Float,
+    var review: String,
+    var picture: String
+    )
