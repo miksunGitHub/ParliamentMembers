@@ -1,9 +1,6 @@
 package com.example.parliamentmembers.utilities
 
-import com.example.parliamentmembers.MemberViewModelFactory
-import com.example.parliamentmembers.PartyMembersFragmentArgs
-import com.example.parliamentmembers.PartyMembersViewModelFactory
-import com.example.parliamentmembers.PartyViewModelFactory
+import com.example.parliamentmembers.*
 import com.example.parliamentmembers.databaseAndNetwork.ParliamentMemberDataBase
 import com.example.parliamentmembers.databaseAndNetwork.Repository
 
@@ -27,5 +24,18 @@ object InjectorUtils {
 
         return MemberViewModelFactory(repository, memberID)
     }
+    fun memberListViewModelFactory(): MemberListViewModelFactory {
+
+        val repository= Repository.getInstance(ParliamentMemberDataBase.getInstance().parliamentMemberDao)
+
+        return MemberListViewModelFactory(repository)
+    }
+    fun ratingViewModelFactory(memberID: Long): RatingViewModelFactory {
+
+        val repository= Repository.getInstance(ParliamentMemberDataBase.getInstance().parliamentMemberDao)
+
+        return RatingViewModelFactory(repository, memberID)
+    }
+
 }
 

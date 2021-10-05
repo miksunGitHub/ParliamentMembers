@@ -114,7 +114,6 @@ class PartyFragment : Fragment() {
 
                     itemView.setOnClickListener{clickListener(partyImageViewData)}
                 }
-
         }
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): MyRecyclerViewAdapter.ViewHolder {

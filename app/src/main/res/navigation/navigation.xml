@@ -34,5 +34,17 @@
         <argument
             android:name="memberID"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_memberFragment_to_ratingFragment"
+            app:destination="@id/ratingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ratingFragment"
+        android:name="com.example.parliamentmembers.RatingFragment"
+        android:label="fragment_rating"
+        tools:layout="@layout/fragment_rating" >
+        <argument
+            android:name="memberID"
+            app:argType="integer" />
     </fragment>
 </navigation>
