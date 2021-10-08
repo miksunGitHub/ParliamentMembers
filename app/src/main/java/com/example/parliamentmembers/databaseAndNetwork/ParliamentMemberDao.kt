@@ -3,6 +3,7 @@ package com.example.parliamentmembers.databaseAndNetwork
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
+
 @Dao
 interface ParliamentMemberDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)

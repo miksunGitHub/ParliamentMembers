@@ -46,7 +46,7 @@ class RatingFragment : Fragment() {
 
                 var rating=binding.ratingBar.rating.toFloat()
 
-                var updatedParliamentMember: ParliamentMember = ParliamentMember(memberID, it.first_name, it.last_name, it.age, it.party, it.constituency, it.minister, rating, review, it.picture)
+                var updatedParliamentMember = ParliamentMember( memberID, it.member_num, it.first_name, it.last_name, it.age, it.party, it.constituency, it.minister, rating, review, it.picture)
 
                 viewModel.updateMember(updatedParliamentMember)
 

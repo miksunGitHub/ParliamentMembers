@@ -56,6 +56,7 @@ class Repository private constructor(private val parliamentMemberDao: Parliament
     fun saveData(data: LiveData<List<ParliamentMemberJsonData>>, viewModelScope: CoroutineScope){
 
         data.value?.forEach{
+                var personNumber=it.personNumber
                 var firstName=it.first
                 var lastName=it.last
                 var age=2020-it.bornYear
@@ -64,7 +65,7 @@ class Repository private constructor(private val parliamentMemberDao: Parliament
                 var minister=it.minister
                 var picture=it.picture
 
-                var parliamentMember= ParliamentMember(first_name = firstName, last_name = lastName, age = age, party = party, constituency = constituency, minister = minister, rating = 0f, review = "", picture = picture)
+                var parliamentMember= ParliamentMember(member_num = personNumber, first_name = firstName, last_name = lastName, age = age, party = party, constituency = constituency, minister = minister, rating = 0f, review = "", picture = picture)
 
                 viewModelScope.launch {
                     try{
