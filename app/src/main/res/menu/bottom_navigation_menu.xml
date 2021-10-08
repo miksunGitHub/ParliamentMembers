@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/partyFragment"
+        android:title="@string/by_party"
+        android:icon="@mipmap/nav_icon"
+        />
+    <item
+        android:id="@+id/memberListFragment"
+        android:title="@string/by_member"
+        android:icon="@mipmap/nav_icon"/>
+</menu>
