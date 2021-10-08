@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".RatingFragment">
+    tools:context=".rating.RatingFragment">
 
     <data>
         <variable
             name="ratingViewModel"
-            type="com.example.parliamentmembers.RatingViewModel" />
+            type="com.example.parliamentmembers.rating.RatingViewModel" />
     </data>
 
 
@@ -29,31 +29,40 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="50dp" />
+
+                <Button
+                    android:id="@+id/saveButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="50dp"
+                    android:text="@string/save" />
+
                 <EditText
                     android:id="@+id/rateMemberEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:autofillHints=""
+                    android:ems="500"
+
                     android:hint="@string/rate_member"
-                    android:inputType="textPersonName"
-                    android:text="@string/rate" />
+                    android:inputType="textMultiLine"
+                    android:maxLength="200"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:scrollHorizontally="false" />
 
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
 
-                <Button
-                    android:id="@+id/saveButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/save" />
-
-                <Button
-                    android:id="@+id/testButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/test" />
             </LinearLayout>
         </ScrollView>
 

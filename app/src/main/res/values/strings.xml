@@ -13,7 +13,7 @@
     <string name="kesk_name">"Centre Party"</string>
     <string name="vihr_name">"Green League"</string>
     <string name="vas_name">"Left Alliance"</string>
-    <string name="r_name">"SwedishPeople´s Party"</string>
+    <string name="r_name">"Swedish People´s Party"</string>
     <string name="kd_name">"Christian Democrats"</string>
     <string name="liik_name">"Movement Now"</string>
     <string name="vkk_name">"Power Belongs to the People"</string>
@@ -24,11 +24,15 @@
     <string name="face_pic">face pic</string>
     <string name="constituency">constituency</string>
     <string name="age">age</string>
-    <string name="rate_pm">Rate PM</string>
-    <string name="rate">Rate</string>
-    <string name="rate_member">Rate member</string>
+    <string name="rate_pm">Rate MP</string>
+    <string name="rate_member">Write a note about the MP</string>
     <string name="save">Save</string>
     <string name="test">Test</string>
-
-
+    <string name="rating">rating</string>
+    <string name="by_party">Parties</string>
+    <string name="by_member">Members</string>
+    <string name="title">title</string>
+    <string name="minister">Minister</string>
+    <string name="pm">Member of Parliament</string>
+    <string name="headline">Parliament of Finland</string>
 </resources>

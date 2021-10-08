@@ -1,14 +1,14 @@
-package com.example.parliamentmembers
+package com.example.parliamentmembers.member
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.compose.runtime.snapshots.Snapshot.Companion.observe
+
 import androidx.core.net.toUri
+
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -16,24 +16,23 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
-import com.example.parliamentmembers.databaseAndNetwork.Repository
+import com.example.parliamentmembers.Functions
+
+import com.example.parliamentmembers.R
+
 import com.example.parliamentmembers.databinding.FragmentMemberBinding
 import com.example.parliamentmembers.utilities.InjectorUtils
-import java.time.LocalDateTime
-import java.util.*
 
-class MemberFragment : Fragment() {
+class MemberFragment : Fragment(), Functions {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         val binding:FragmentMemberBinding=DataBindingUtil.inflate(
             inflater, R.layout.fragment_member, container,false)
 
-
-
         binding.setLifecycleOwner(this)
 
-        val memberFragmentArgs=MemberFragmentArgs.fromBundle(requireArguments())
+        val memberFragmentArgs= MemberFragmentArgs.fromBundle(requireArguments())
 
         var memberID=memberFragmentArgs.memberID
 
@@ -44,28 +43,44 @@ class MemberFragment : Fragment() {
 
         binding.memberViewModel= viewModel
 
-        //viewModel.storeImgCaches(binding.memberFaceView)
+        viewModel.getMemberById.observe(viewLifecycleOwner, Observer{
+            binding.partyMemberFirstName.setText(it.first_name)
+            binding.partyMemberLastName.setText(it.last_name)
 
+            var ageText="Age: "+it.age
 
+            binding.ageView.setText(ageText)
 
-        viewModel.parliamentMemberDataByID.observe(viewLifecycleOwner, Observer{
-            binding.partyMemberFirstName.setText(it.first().first_name)
-            binding.partyMemberLastName.setText(it.first().last_name)
+            var title=it.minister
 
-            //https://stackoverflow.com/questions/136419/get-integer-value-of-the-current-year-in-java
-            var currentYear= Calendar.getInstance().get(Calendar.YEAR)
-            binding.ageView.setText((currentYear-it.first().age).toString())
+            if(title){
+                binding.titleView.setText(R.string.minister)
+            }else binding.titleView.setText(R.string.pm)
 
-            binding.partyNameView.setText(it.first().party)
-            binding.constituencyView.setText(it.first().constituency)
+            var party=it.party
 
-            var rating=it.first().rating
+            var partyRes: Int=partyStringToStringRes(party)
 
-            if(rating>0.0){binding.ratingBar.setRating(rating)}
+            binding.partyNameView.setText(partyRes)
+
+            binding.constituencyView.setText(it.constituency)
+
+            var rating=it.rating
+
+            if(rating>0.0){
+                var ratingBar=binding.ratingBar
+
+                ratingBar.visibility=VISIBLE
+
+                ratingBar.setRating(rating)}
+
+            var review=it.review
+
+            binding.ratingTextView.setText(review)
 
             var imageView=binding.memberFaceView
 
-            var imgUrl="https://avoindata.eduskunta.fi/"+it.first().picture
+            var imgUrl="https://avoindata.eduskunta.fi/"+it.picture
 
             val imageUri=imgUrl.toUri().buildUpon().scheme("https").build()
 
@@ -76,6 +91,8 @@ class MemberFragment : Fragment() {
                 .apply(RequestOptions()
                     .placeholder(R.drawable.member_pic))
                 .into(imageView)
+
+
 
             binding.rateButton.setOnClickListener(){
                 this.findNavController().navigate(MemberFragmentDirections.actionMemberFragmentToRatingFragment(memberID))
