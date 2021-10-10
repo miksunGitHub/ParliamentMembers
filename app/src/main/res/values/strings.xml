@@ -18,7 +18,7 @@
     <string name="liik_name">"Movement Now"</string>
     <string name="vkk_name">"Power Belongs to the People"</string>
     <string name="partyID">partyID</string>
-    <string name="info">info</string>
+    <string name="info">Info</string>
     <string name="last">last</string>
     <string name="first">first</string>
     <string name="face_pic">face pic</string>
@@ -30,9 +30,32 @@
     <string name="test">Test</string>
     <string name="rating">rating</string>
     <string name="by_party">Parties</string>
-    <string name="by_member">Members</string>
+    <string name="by_member">All members</string>
+    <string name="constituencies">Constituencies</string>
     <string name="title">title</string>
     <string name="minister">Minister</string>
     <string name="pm">Member of Parliament</string>
     <string name="headline">Parliament of Finland</string>
+    <string name="find_a_member_by_name">Name: parliament member</string>
+    <string name="parlament_logo">parlament logo</string>
+    <string name="find">Find</string>
+    <string name="helsinki">Helsinki</string>
+    <string name="uusimaa">Uusimaa</string>
+    <string name="varsinais_suomi">Varsinais-Suomi</string>
+    <string name="satakunta">Satakunta</string>
+    <string name="land">Åland</string>
+    <string name="h_me">Häme</string>
+    <string name="pirkanmaa">Pirkanmaa</string>
+    <string name="southeast_finland">Southeast Finland</string>
+    <string name="savo_karelia">Savo-Karelia</string>
+    <string name="vaasa">Vaasa</string>
+    <string name="central_finland">Central Finland</string>
+    <string name="oulu">Oulu</string>
+    <string name="lapland">Lapland</string>
+    <string name="string_lapland">Lapland</string>
+    <string name="search_by_name">Search</string>
+    <string name="parties">Parties</string>
+    <string name="all_members">All members</string>
+
+
 </resources>

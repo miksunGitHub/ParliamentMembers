@@ -6,7 +6,14 @@
         android:icon="@mipmap/nav_icon"
         />
     <item
+        android:id="@+id/constituencyFragment"
+        android:title="@string/constituencies"
+        android:icon="@mipmap/nav_icon"
+        />
+    <item
         android:id="@+id/memberListFragment"
         android:title="@string/by_member"
-        android:icon="@mipmap/nav_icon"/>
+        android:icon="@mipmap/nav_icon"
+        />
+
 </menu>

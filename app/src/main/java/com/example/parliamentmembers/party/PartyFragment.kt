@@ -1,36 +1,38 @@
 package com.example.parliamentmembers.party
 
-
 import android.os.Bundle
-
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-
 import androidx.databinding.DataBindingUtil
-
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.parliamentmembers.*
-
 import com.example.parliamentmembers.databinding.FragmentPartyBinding
 import com.example.parliamentmembers.utilities.InjectorUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+//Mikko Suhonen
+//Student ID: 2012950
+//Date: 11.10.2021
+//
+//Class for the party image fragment, which is the first fragment shown, when the app starts.
+//List of objects observed from view model and passed to recycler view adapter. Menus created.
 
 class PartyFragment : Fragment() {
+    private lateinit var drawerLayout: DrawerLayout
+
+    private lateinit var binding: FragmentPartyBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding: FragmentPartyBinding = DataBindingUtil.inflate(
+        binding= DataBindingUtil.inflate(
             inflater, R.layout.fragment_party, container, false)
 
         binding.setLifecycleOwner (this)
@@ -42,13 +44,12 @@ class PartyFragment : Fragment() {
 
         binding.partyViewModel= viewModel
 
+        //Sets the bottom navigation bar
         var bottomNavigationView: BottomNavigationView =binding.bottomNavigationView
-
         val navCotroller=this.findNavController()
-
         bottomNavigationView.setupWithNavController(navCotroller)
 
-
+        //List of objects passed to recycler view adapter
         var partyListData=mutableSetOf<PartyImageViewData>()
 
         viewModel.partyList.observe(viewLifecycleOwner, Observer{
@@ -58,24 +59,35 @@ class PartyFragment : Fragment() {
                 partyListData.add(it)
             }
 
+            //On click listener for the recycler view member
             fun recyclerViewItemClicked(item: PartyImageViewData) {
 
+                //Navigates to party members fragment, party name is added to safeArgs.
                 this.findNavController().navigate(PartyFragmentDirections.actionPartyFragmentToPartyMembersFragment(item.party))
             }
 
-            var partyListDataToRV=partyListData.toList()
+            //Set is transformed to a list
+            var partyListDataToRecyclerView=partyListData.toList()
 
-            partyListDataToRV=partyListDataToRV.sortedBy {
+            //The list is sorted by the count integers
+            partyListDataToRecyclerView=partyListDataToRecyclerView.sortedBy {
                 it.count  }
 
+            //The list and the on click listener are passed to recycler view adapter
             binding.partyRecyclerView.layoutManager = LinearLayoutManager(view?.context)
-
-            binding.partyRecyclerView.adapter = PartyViewRecyclerViewAdapter(partyListDataToRV,
+            binding.partyRecyclerView.adapter = PartyViewRecyclerViewAdapter(partyListDataToRecyclerView,
                 {item: PartyImageViewData -> recyclerViewItemClicked(item)})
 
         })
+        setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    //Sets the options menu to the fragment
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.options_menu, menu)
     }
 }
 

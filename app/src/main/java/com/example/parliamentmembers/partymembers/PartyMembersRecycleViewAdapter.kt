@@ -12,6 +12,12 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.parliamentmembers.R
 
+//Mikko Suhonen
+//Student ID: 2012950
+//Date: 11.10.2021
+//
+//Recycler view adapter for the party members fragment
+
 class PartyMembersRecyclerViewAdapter(
     private val partyMemberList: List<ParliamentMember>, private val clickListener: (ParliamentMember)->Unit
 ) :

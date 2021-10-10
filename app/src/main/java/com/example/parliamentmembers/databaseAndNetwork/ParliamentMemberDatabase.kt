@@ -5,6 +5,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.parliamentmembers.MyApp
 
+//Mikko Suhonen
+//Student ID: 2012950
+//Date: 11.10.2021
+//
+//Class mostly copied from materials provided by Metropolia University of Applied Sciencies
+
 @Database(entities=[ParliamentMember::class], version=3, exportSchema=false)
 abstract class ParliamentMemberDataBase: RoomDatabase() {
     abstract val parliamentMemberDao: ParliamentMemberDao

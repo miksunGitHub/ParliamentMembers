@@ -5,7 +5,11 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-
+//Mikko Suhonen
+//Student ID: 2012950
+//Date: 11.10.2021
+//
+//Defines the entry stored in the database
 
 @Entity(tableName="member_data", indices=[Index(value=["member_number"], unique=true)])
 data class ParliamentMember(

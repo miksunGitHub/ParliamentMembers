@@ -12,7 +12,14 @@
         tools:layout="@layout/fragment_party" >
         <action
             android:id="@+id/action_partyFragment_to_partyMembersFragment"
-            app:destination="@id/partyMembersFragment" />
+            app:destination="@id/partyMembersFragment"
+            app:popUpTo="@id/partyMembersFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_partyFragment_to_memberFragment"
+            app:destination="@id/memberFragment"
+            app:popUpTo="@id/partyFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/partyMembersFragment"
@@ -24,7 +31,9 @@
             app:argType="string" />
         <action
             android:id="@+id/action_partyMembersFragment_to_memberFragment"
-            app:destination="@id/memberFragment" />
+            app:destination="@id/memberFragment"
+            app:popUpTo="@id/partyMembersFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/memberFragment"
@@ -36,7 +45,9 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_memberFragment_to_ratingFragment"
-            app:destination="@id/ratingFragment" />
+            app:destination="@id/ratingFragment"
+            app:popUpTo="@id/ratingFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/ratingFragment"
@@ -48,7 +59,9 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_ratingFragment_to_memberFragment"
-            app:destination="@id/memberFragment" />
+            app:destination="@id/memberFragment"
+            app:popUpTo="@id/ratingFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/memberListFragment"
@@ -56,6 +69,55 @@
         android:label="MemberListFragment" >
         <action
             android:id="@+id/action_memberListFragment_to_memberFragment"
-            app:destination="@id/memberFragment" />
+            app:destination="@id/memberFragment"
+            app:popUpTo="@id/memberListFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_memberListFragment_to_partyFragment"
+            app:destination="@id/partyFragment"
+            app:popUpTo="@id/memberListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/constituencyFragment"
+        android:name="com.example.parliamentmembers.constituency.ConstituencyFragment"
+        android:label="fragment_constituency"
+        tools:layout="@layout/fragment_constituency" >
+        <action
+            android:id="@+id/action_constituencyFragment_to_partyFragment"
+            app:destination="@id/partyFragment"
+            app:popUpTo="@id/partyFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_constituencyFragment_to_constituencyMembersFragment"
+            app:destination="@id/constituencyMembersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/constituencyMembersFragment"
+        android:name="com.example.parliamentmembers.constituency.ConstituencyMembersFragment"
+        android:label="fragment_constituency_members"
+        tools:layout="@layout/fragment_constituency_members" >
+        <action
+            android:id="@+id/action_constituencyMembersFragment_to_memberFragment"
+            app:destination="@id/memberFragment" />
+        <argument
+            android:name="constituency"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/nameFragment"
+        android:name="com.example.parliamentmembers.name.NameFragment"
+        android:label="fragment_name"
+        tools:layout="@layout/fragment_name" >
+        <action
+            android:id="@+id/action_nameFragment_to_memberFragment"
+            app:destination="@id/memberFragment"
+            app:popUpTo="@id/partyFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoFragment2"
+        android:name="com.example.parliamentmembers.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" />
 </navigation>

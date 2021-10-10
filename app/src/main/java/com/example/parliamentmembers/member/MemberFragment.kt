@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-
 import androidx.core.net.toUri
-
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -17,11 +15,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import com.example.parliamentmembers.Functions
-
 import com.example.parliamentmembers.R
-
 import com.example.parliamentmembers.databinding.FragmentMemberBinding
 import com.example.parliamentmembers.utilities.InjectorUtils
+
+//Mikko Suhonen
+//Student ID: 2012950
+//Date: 11.10.2021
+//
+//Class defines the contents of the views in the member fragment.
 
 class MemberFragment : Fragment(), Functions {
 
@@ -32,8 +34,8 @@ class MemberFragment : Fragment(), Functions {
 
         binding.setLifecycleOwner(this)
 
+        //The id of the member chosen in the previous fragment is gotten from the safeArgs.
         val memberFragmentArgs= MemberFragmentArgs.fromBundle(requireArguments())
-
         var memberID=memberFragmentArgs.memberID
 
         val factory=InjectorUtils.memberViewModelFactory(memberID)
@@ -43,8 +45,11 @@ class MemberFragment : Fragment(), Functions {
 
         binding.memberViewModel= viewModel
 
+        //Observers the live data object in the view model, defines the contents of the view to
+        //match the object
         viewModel.getMemberById.observe(viewLifecycleOwner, Observer{
             binding.partyMemberFirstName.setText(it.first_name)
+
             binding.partyMemberLastName.setText(it.last_name)
 
             var ageText="Age: "+it.age
@@ -53,6 +58,7 @@ class MemberFragment : Fragment(), Functions {
 
             var title=it.minister
 
+            //Defines which string resource is shown in the title view.
             if(title){
                 binding.titleView.setText(R.string.minister)
             }else binding.titleView.setText(R.string.pm)
@@ -67,6 +73,7 @@ class MemberFragment : Fragment(), Functions {
 
             var rating=it.rating
 
+            //If the member has been rated, the rating bar is show with rating given.
             if(rating>0.0){
                 var ratingBar=binding.ratingBar
 
@@ -74,17 +81,17 @@ class MemberFragment : Fragment(), Functions {
 
                 ratingBar.setRating(rating)}
 
+            //
             var review=it.review
-
             binding.ratingTextView.setText(review)
 
+            //Glide used to set a picture of the member from an Url to the image view
             var imageView=binding.memberFaceView
 
             var imgUrl="https://avoindata.eduskunta.fi/"+it.picture
 
             val imageUri=imgUrl.toUri().buildUpon().scheme("https").build()
 
-            //https://proandroiddev.com/glideing-your-way-into-recyclerview-state-invalidation-5632fdb9be85
             Glide.with(imageView.context)
                 .load(imageUri)
                 .override(SIZE_ORIGINAL, 200)
@@ -92,14 +99,11 @@ class MemberFragment : Fragment(), Functions {
                     .placeholder(R.drawable.member_pic))
                 .into(imageView)
 
-
-
+            //Navigates to rating fragment. Member id passed in SafeArgs.
             binding.rateButton.setOnClickListener(){
                 this.findNavController().navigate(MemberFragmentDirections.actionMemberFragmentToRatingFragment(memberID))
             }
         })
-
-
 
         return binding.root
     }

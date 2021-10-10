@@ -1,28 +1,18 @@
 package com.example.parliamentmembers.member
 
-
-
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.parliamentmembers.Functions
-import com.example.parliamentmembers.databaseAndNetwork.ParliamentMember
 import com.example.parliamentmembers.databaseAndNetwork.Repository
 
-class MemberViewModel(private val repository: Repository, private val memberID: Int): ViewModel(), Functions {
+//Mikko Suhonen
+//Student ID: 2012950
+//Date: 11.10.2021
+//
+//View model for the member fragment. Passes an live data object that matches the id given in the
+//constructor with the observed live data in the repository.
 
-    private val _member= MutableLiveData<ParliamentMember>()
-    val member: LiveData<ParliamentMember>
-        get()=_member
-
-    private val _firstName= MutableLiveData<String>()
-    val firstName: LiveData<String>
-        get()=_firstName
-
-
-
+class MemberViewModel(private val repository: Repository, private val memberID: Int): ViewModel(),
+        Functions {
 
     var getMemberById=repository.getMemberByID(memberID.toLong())
 

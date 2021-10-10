@@ -4,6 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.parliamentmembers.databaseAndNetwork.Repository
 
+//Mikko Suhonen
+//Student ID: 2012950
+//Date: 11.10.2021
+//
+//View model factory for the party view model
+
 class PartyViewModelFactory(
     private val repository: Repository) : ViewModelProvider.Factory{
     @Suppress("unchecked_cast")

@@ -19,7 +19,7 @@
         android:contentDescription="@string/partyLogo"
         android:foregroundGravity="top"
         android:paddingBottom="4dp"
-        app:srcCompat="@drawable/kesk" />
+        app:srcCompat="@drawable/eduskunta" />
 
     <TextView
         android:id="@+id/partyText"

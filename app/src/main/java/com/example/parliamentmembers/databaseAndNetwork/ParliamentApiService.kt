@@ -6,6 +6,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
+//Mikko Suhonen
+//Student ID: 2012950
+//Date: 11.10.2021
+//
+//Mostly copied from materials provided by Metropolia University of Applied Sciencies
+
 private const val BASE_URL = "https://users.metropolia.fi/"
 
 private val moshi = Moshi.Builder()

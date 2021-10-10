@@ -1,7 +1,6 @@
 package com.example.parliamentmembers.rating
 
 import android.os.Bundle
-
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +9,21 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-
+import com.example.parliamentmembers.Functions
 import com.example.parliamentmembers.R
 import com.example.parliamentmembers.databaseAndNetwork.ParliamentMember
 import com.example.parliamentmembers.databinding.FragmentRatingBinding
 import com.example.parliamentmembers.member.MemberFragmentArgs
 import com.example.parliamentmembers.utilities.InjectorUtils
 
+//Mikko Suhonen
+//Student ID: 2012950
+//Date: 11.10.2021
+//
+//Fragment, where the user can store a numeric 1 to 5 rating and a short review text, which are
+//displayed in the member fragment.
 
-class RatingFragment : Fragment() {
-
+class RatingFragment : Fragment(), Functions {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -29,27 +33,36 @@ class RatingFragment : Fragment() {
 
         binding.setLifecycleOwner(this)
 
+        //Gets the member ID from the safeArgs.
         val memberFragmentArgs= MemberFragmentArgs.fromBundle(requireArguments())
-
         var memberID=memberFragmentArgs.memberID
 
+        //Creates a view model factory passing the member Id as a constructor parameter
         val factory=InjectorUtils.ratingViewModelFactory(memberID)
 
         val viewModel= ViewModelProviders.of(this, factory)
             .get(RatingViewModel::class.java)
 
-
         binding.saveButton.setOnClickListener {
             viewModel.getMemberByID(memberID.toLong()).observe(viewLifecycleOwner, Observer {
 
-                var review = binding.rateMemberEditText.text.toString()
+                var previousReviews=it.review
 
-                var rating=binding.ratingBar.rating.toFloat()
+                var currentReview=binding.rateMemberEditText.text.toString()
 
+                //If a review already exists in the database, the new review is added to it
+                //with 2 new line characters separating the reviews.
+                var review=concatenateReviews(previousReviews, currentReview)
+
+                var rating=binding.ratingBar.rating
+
+                //parliment member object with the given rating and review attached
                 var updatedParliamentMember = ParliamentMember( memberID, it.member_num, it.first_name, it.last_name, it.age, it.party, it.constituency, it.minister, rating, review, it.picture)
 
+                //View model function used to update the data in the database
                 viewModel.updateMember(updatedParliamentMember)
 
+                //Navigates back to the member fragment passing member Id in the safeArgs.
                 this.findNavController().navigate(RatingFragmentDirections.actionRatingFragmentToMemberFragment(memberID))
             })
         }

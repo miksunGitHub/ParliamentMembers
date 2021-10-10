@@ -1,27 +1,16 @@
 package com.example.parliamentmembers
 
-import android.view.View
+//Mikko Suhonen
+//Student ID: 2012950
+//Date: 11.10.2021
+//
+//Functions storage
 
 interface Functions {
 
-    fun partyStringToDrawable(partyName: String): Int{
-        var partyImg = when (partyName) {
-            "kok" -> return R.drawable.kok
-            "sd" -> return  R.drawable.sdp
-            "kesk" -> return  R.drawable.kesk
-            "ps" -> return  R.drawable.perussuomalaiset
-            "vihr" -> return  R.drawable.vihrea
-            "vas" -> return  R.drawable.vas
-            "r" -> return  R.drawable.rkp
-            "kd" -> return  R.drawable.kristill
-            "liik" -> return  R.drawable.liikenyt
-
-            else -> return  R.drawable.eduskunta
-        }
-    }
-
+    //Returns a string resource mathing party name found in the database
     fun partyStringToStringRes(partyName: String): Int {
-        var partyName = when (partyName) {
+        when (partyName) {
 
             "kok" -> return R.string.kok_name
             "sd" -> return R.string.sd_name
@@ -37,8 +26,10 @@ interface Functions {
         }
     }
 
+    //The order of parties in the party fragment. The order is defined by the results of
+    //the latest election. From largest parliament group to largest.
     fun sortParties(partyName: String): Int{
-        var partyName = when (partyName) {
+        when (partyName) {
             "sd" -> return 1
             "ps" -> return 2
             "kok" -> return 3
@@ -50,6 +41,40 @@ interface Functions {
             "liik"-> return 9
 
             else -> return 10
+        }
+    }
+
+    //If an review has been already stored in the database, adds the new review added with two
+    //new line characters attached.
+    fun concatenateReviews(previous: String, current: String): String{
+        var previousReviews=previous
+
+        var newReview: String
+
+        newReview = if(previousReviews==""){
+            current
+
+        }else{
+            previousReviews+"\n\n"+current
+        }
+
+        return newReview
+    }
+
+    fun partyStringToUrl(partyName: String): String{
+        when (partyName) {
+
+            "kok" -> return "kok.png"
+            "sd" -> return "sdp.png"
+            "kesk" -> return "kesk.png"
+            "ps" -> return "perussuomalaiset.png"
+            "vihr" -> return "vihrea.png"
+            "vas" -> return "vas.png"
+            "r" -> return "rkp.png"
+            "kd" -> return "kristill.png"
+            "liik" -> return "liikenyt.png"
+
+            else -> return "vkk.png"
         }
     }
 }
