@@ -27,17 +27,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MemberListFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    private lateinit var binding: FragmentMemberListBinding
 
-        val binding: FragmentMemberListBinding =DataBindingUtil.inflate(
+    private lateinit var bottomNavigationView: BottomNavigationView
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
+
+        binding =DataBindingUtil.inflate(
             inflater, R.layout.fragment_member_list, container, false)
 
         binding.lifecycleOwner = this
 
         //Sets the bottom navigation bar
         val navController=this.findNavController()
-        var bottomNavigationView: BottomNavigationView =binding.bottomNavigationView
+        bottomNavigationView=binding.bottomNavigationView
         bottomNavigationView.setupWithNavController(navController)
 
         val factory=InjectorUtils.memberListViewModelFactory()
@@ -56,7 +60,6 @@ class MemberListFragment : Fragment() {
                 //Navigates to member fragment, passes the id of the member chosen to safeArgs.
                 this.findNavController().navigate(MemberListFragmentDirections.actionMemberListFragmentToMemberFragment(item.id))
             }
-
 
             //Defines the grid layout
             val manager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)

@@ -28,19 +28,21 @@ import com.example.parliamentmembers.utilities.InjectorUtils
 
 class PartyMembersFragment : Fragment(), Functions {
 
+    private lateinit var binding: FragmentPartyMembersBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val binding: FragmentPartyMembersBinding = DataBindingUtil.inflate(
+                              savedInstanceState: Bundle?): View {
+        binding= DataBindingUtil.inflate(
             inflater, R.layout.fragment_party_members, container, false)
 
         binding.lifecycleOwner = this
 
         //Gets the party chosen in the previous fragment from safeArgs
         val membersFragmentArgs= PartyMembersFragmentArgs.fromBundle(requireArguments())
-        var partyChosen=membersFragmentArgs.partyID
+        val partyChosen=membersFragmentArgs.partyID
 
         //The name of the party is added to the up bar
-        var partyName=partyStringToPartyName(partyChosen)
+        val partyName=partyStringToPartyName(partyChosen)
         (activity as AppCompatActivity).supportActionBar?.title=partyName
 
         //Creates the view model factory with the party name as parameter

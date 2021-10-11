@@ -11,7 +11,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.parliamentmembers.R
+import com.example.parliamentmembers.constituency.ConstituencyMembersRecyclerViewAdapter
 import com.example.parliamentmembers.databaseAndNetwork.ParliamentMember
+import com.example.parliamentmembers.databinding.ConstituencyViewBinding
+import com.example.parliamentmembers.databinding.MemberListViewBinding
+import kotlinx.android.synthetic.main.member_list_view.view.*
 
 //Mikko Suhonen
 //Student ID: 2012950
@@ -20,52 +24,61 @@ import com.example.parliamentmembers.databaseAndNetwork.ParliamentMember
 //Recycler view adapter for the member list fragment
 
 class MemberListRecyclerViewAdapter(
-    private val partyMemberList: List<ParliamentMember>, private val clickListener: (ParliamentMember)->Unit
-) :
-    RecyclerView.Adapter<MemberListRecyclerViewAdapter.ViewHolder>() {
+        private val partyMemberList: List<ParliamentMember>, private val clickListener: (ParliamentMember)->Unit
+):
+        RecyclerView.Adapter<MemberListRecyclerViewAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        fun bind(parliamentMember: ParliamentMember, clickListener: (ParliamentMember) -> Unit) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-            val firstNameView = itemView.findViewById<TextView>(R.id.memberNameFirst)
-            val firstName=parliamentMember.first_name
+        val item = partyMemberList[position]
+
+        viewHolder.bind(item, clickListener)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+        return ViewHolder.from(parent)
+
+    }
+
+    class ViewHolder private constructor(val binding: MemberListViewBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        private val firstNameView = binding.memberNameFirst
+
+        private val lastNameView = binding.memberNameLast
+
+        private val imageView = binding.memberImageView
+
+        fun bind(item: ParliamentMember, clickListener: (ParliamentMember) -> Unit) {
+
+            val firstName=item.first_name
             firstNameView.text = firstName
 
-            val lastNameView=itemView.findViewById<TextView>(R.id.memberNameLast)
-            val lastName=parliamentMember.last_name
+            val lastName=item.last_name
             lastNameView.text=lastName
 
-            val imageView=itemView.findViewById<ImageView>(R.id.memberImageView)
-            var imgUrl="https://avoindata.eduskunta.fi/"+parliamentMember.picture
+            var imgUrl="https://avoindata.eduskunta.fi/"+item.picture
             val imageUri=imgUrl.toUri().buildUpon().scheme("https").build()
 
             Glide.with(imageView.context)
-                .load(imageUri)
-                .override(Target.SIZE_ORIGINAL, 200)
-                .apply(
-                    RequestOptions()
-                        .placeholder(R.drawable.member_pic))
-                .into(imageView)
+                    .load(imageUri)
+                    .override(Target.SIZE_ORIGINAL, 200)
+                    .apply(
+                            RequestOptions()
+                                    .placeholder(R.drawable.member_pic))
+                    .into(imageView)
 
-            itemView.setOnClickListener{clickListener(parliamentMember)}
+            itemView.setOnClickListener { clickListener(item) }
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = MemberListViewBinding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
+            }
         }
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): MemberListRecyclerViewAdapter.ViewHolder {
-        val itemView =
-            LayoutInflater.from(viewGroup.context).inflate(
-                R.layout.member_list_view, viewGroup,
-                false
-            )
-        return ViewHolder(itemView)
-    }
-
-    override fun getItemCount(): Int {
-        return partyMemberList.size
-    }
-
-    override fun onBindViewHolder(viewHolder: MemberListRecyclerViewAdapter.ViewHolder, position: Int) {
-        viewHolder.bind(partyMemberList[position], clickListener)
-    }
-
+    override fun getItemCount(): Int = partyMemberList.size
 }

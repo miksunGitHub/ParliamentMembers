@@ -1,16 +1,14 @@
 package com.example.parliamentmembers.party
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.parliamentmembers.R
+import com.example.parliamentmembers.databinding.PartyViewBinding
 
 //Mikko Suhonen
 //Student ID: 2012950
@@ -22,23 +20,38 @@ import com.example.parliamentmembers.R
 //https://www.andreasjakl.com/recyclerview-kotlin-style-click-listener-android/
 //https://guides.codepath.com/android/using-the-recyclerview
 //https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview
+//https://developer.android.com/codelabs/kotlin-android-training-recyclerview-fundamentals?index=..%2F..android-kotlin-fundamentals#0
 
 class PartyViewRecyclerViewAdapter(
         private val partyList: List<PartyImageViewData>, private val clickListener: (PartyImageViewData)->Unit
-) :
-    RecyclerView.Adapter<PartyViewRecyclerViewAdapter.ViewHolder>() {
+):
+        RecyclerView.Adapter<PartyViewRecyclerViewAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        fun bind(partyImageViewData: PartyImageViewData, clickListener: (PartyImageViewData) -> Unit) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-            val partyNameView = itemView.findViewById<TextView>(R.id.partyText)
-            partyNameView.setText(partyImageViewData.partyName)
+        val item = partyList[position]
 
-            val partyLogoView = itemView.findViewById<ImageView>(R.id.partyLogoView)
+        viewHolder.bind(item, clickListener)
+    }
 
-            //Png-images of party logos are stored in the metropolia server
-            var imgUrl="https://users.metropolia.fi/~a16002/pngs/"+partyImageViewData.partyLogo
-            val imageUri=imgUrl.toUri().buildUpon().scheme("https").build()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+        return ViewHolder.from(parent)
+
+    }
+
+    class ViewHolder private constructor(val binding: PartyViewBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        private val partyNameView = binding.partyText
+
+        private val partyLogoView = binding.partyLogoView
+
+        fun bind(item: PartyImageViewData, clickListener: (PartyImageViewData) -> Unit) {
+
+            partyNameView.setText(item.partyName)
+
+            var imgUrl = "https://users.metropolia.fi/~a16002/pngs/" + item.partyLogo
+            val imageUri = imgUrl.toUri().buildUpon().scheme("https").build()
 
             Glide.with(partyLogoView.context)
                     .load(imageUri)
@@ -48,26 +61,18 @@ class PartyViewRecyclerViewAdapter(
                                     .placeholder(R.drawable.member_pic))
                     .into(partyLogoView)
 
-            itemView.setOnClickListener{clickListener(partyImageViewData)}
+            itemView.setOnClickListener { clickListener(item) }
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = PartyViewBinding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
+            }
         }
     }
 
-
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val itemView =
-            LayoutInflater.from(viewGroup.context).inflate(
-                    R.layout.party_view, viewGroup,
-                false
-            )
-        return ViewHolder(itemView)
-    }
-
-    override fun getItemCount(): Int {
-        return partyList.size
-    }
-
-    override fun onBindViewHolder(viewHolder: PartyViewRecyclerViewAdapter.ViewHolder, position: Int) {
-        viewHolder.bind(partyList[position], clickListener)
-    }
+    override fun getItemCount(): Int = partyList.size
 
 }

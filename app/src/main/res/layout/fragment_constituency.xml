@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".constituency.ConstituencyFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/helsinkiTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.08"
+                    android:gravity="center"
+                    android:text="@string/helsinki"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/uusimaaTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.08"
+                    android:gravity="center"
+                    android:text="@string/uusimaa"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/varsinaisTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.08"
+                    android:gravity="center"
+                    android:text="@string/varsinais_suomi"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/satakuntaTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.08"
+                    android:gravity="center"
+                    android:text="@string/satakunta"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/alandTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.08"
+                    android:gravity="center"
+                    android:text="@string/land"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/hameTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.08"
+                    android:gravity="center"
+                    android:text="@string/h_me"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/pirkanmaaView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.08"
+                    android:gravity="center"
+                    android:text="@string/pirkanmaa"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/southeastTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.08"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:text="@string/southeast_finland"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/savokareliaTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.08"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:text="@string/savo_karelia"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/vaasaTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.08"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:text="@string/vaasa"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/centralTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.08"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:text="@string/central_finland"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/ouluTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.08"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:text="@string/oulu"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/laplandTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="0.08"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:text="@string/string_lapland"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            app:menu="@menu/bottom_navigation_menu" />
+    </LinearLayout>
+
+
+</layout>

@@ -16,8 +16,8 @@ class PartyMembersViewModel (private val repository: Repository, private val par
     //Observes the live data list of parliament member objects, that matches the party name given
     //in the class constructor.
     //Sorts the list in to an alphabetical order by last name.
-    val parliamentMemberDataByParty=Transformations.map(repository.getMembersByParty(partyName)){
-        it.sortedBy { it.last_name }
+    val parliamentMemberDataByParty=Transformations.map(repository.getMembersByParty(partyName)){ list ->
+        list.sortedBy { it.last_name }
     }
 
 }

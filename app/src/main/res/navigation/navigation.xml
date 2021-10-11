@@ -15,11 +15,6 @@
             app:destination="@id/partyMembersFragment"
             app:popUpTo="@id/partyMembersFragment"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_partyFragment_to_memberFragment"
-            app:destination="@id/memberFragment"
-            app:popUpTo="@id/partyFragment"
-            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/partyMembersFragment"
@@ -32,7 +27,7 @@
             android:id="@+id/action_partyMembersFragment_to_memberFragment"
             app:destination="@id/memberFragment"
             app:popUpTo="@id/partyMembersFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/memberFragment"
@@ -68,7 +63,7 @@
             android:id="@+id/action_memberListFragment_to_memberFragment"
             app:destination="@id/memberFragment"
             app:popUpTo="@id/memberListFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_memberListFragment_to_partyFragment"
             app:destination="@id/partyFragment"

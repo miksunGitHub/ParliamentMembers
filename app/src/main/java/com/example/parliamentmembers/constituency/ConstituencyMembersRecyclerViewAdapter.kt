@@ -1,4 +1,4 @@
-package com.example.parliamentmembers.databaseAndNetwork
+package com.example.parliamentmembers.constituency
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,18 +8,19 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.parliamentmembers.R
-import com.example.parliamentmembers.databinding.PartyMembersViewBinding
+import com.example.parliamentmembers.databaseAndNetwork.ParliamentMember
+import com.example.parliamentmembers.databinding.ConstituencyViewBinding
 
 //Mikko Suhonen
 //Student ID: 2012950
 //Date: 11.10.2021
 //
-//Recycler view adapter for the party members fragment
+//Recycler view adapter for the constituency members fragment
 
-class PartyMembersRecyclerViewAdapter(
+class ConstituencyMembersRecyclerViewAdapter(
         private val partyMemberList: List<ParliamentMember>, private val clickListener: (ParliamentMember)->Unit
 ):
-        RecyclerView.Adapter<PartyMembersRecyclerViewAdapter.ViewHolder>() {
+        RecyclerView.Adapter<ConstituencyMembersRecyclerViewAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
@@ -31,22 +32,21 @@ class PartyMembersRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         return ViewHolder.from(parent)
-
     }
 
-    class ViewHolder private constructor(val binding: PartyMembersViewBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder private constructor(val binding: ConstituencyViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val firstNameView = binding.partyMemberName
+        val nameView = binding.constMemberName
 
-        val imageView=binding.memberImageView
+        val imageView = binding.constImageView
 
         fun bind(item: ParliamentMember, clickListener: (ParliamentMember) -> Unit) {
 
-            val name=item.first_name+" "+item.last_name
-            firstNameView.text = name
+            val firstName = item.first_name + " " + item.last_name
+            nameView.text = firstName
 
-            var imgUrl="https://avoindata.eduskunta.fi/"+item.picture
-            val imageUri=imgUrl.toUri().buildUpon().scheme("https").build()
+            var imgUrl = "https://avoindata.eduskunta.fi/" + item.picture
+            val imageUri = imgUrl.toUri().buildUpon().scheme("https").build()
 
             Glide.with(imageView.context)
                     .load(imageUri)
@@ -62,7 +62,7 @@ class PartyMembersRecyclerViewAdapter(
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = PartyMembersViewBinding.inflate(layoutInflater, parent, false)
+                val binding = ConstituencyViewBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }

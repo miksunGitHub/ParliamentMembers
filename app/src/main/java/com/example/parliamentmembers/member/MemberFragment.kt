@@ -28,16 +28,18 @@ import com.example.parliamentmembers.utilities.InjectorUtils
 
 class MemberFragment : Fragment(), Functions {
 
+    private lateinit var binding: FragmentMemberBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        val binding:FragmentMemberBinding=DataBindingUtil.inflate(
+        savedInstanceState: Bundle?): View {
+        binding=DataBindingUtil.inflate(
             inflater, R.layout.fragment_member, container,false)
 
         binding.lifecycleOwner = this
 
         //The id of the member chosen in the previous fragment is gotten from the safeArgs.
         val memberFragmentArgs= MemberFragmentArgs.fromBundle(requireArguments())
-        var memberID=memberFragmentArgs.memberID
+        val memberID=memberFragmentArgs.memberID
 
         val factory=InjectorUtils.memberViewModelFactory(memberID)
 
@@ -50,50 +52,46 @@ class MemberFragment : Fragment(), Functions {
         //match the object
         viewModel.getMemberById.observe(viewLifecycleOwner, Observer{
 
-            var name=it.first_name+" "+it.last_name
-
+            val name=it.first_name+" "+it.last_name
             binding.partyMembersName.text =name
 
             //The name of the member is added to the up bar
             (activity as AppCompatActivity).supportActionBar?.title=name
-
-            var ageText="Age: "+it.age
+            val ageText="Age: "+it.age
 
             binding.ageView.text = ageText
-
-            var title=it.minister
+            val title=it.minister
 
             //Defines which string resource is shown in the title view.
             if(title){
                 binding.titleView.setText(R.string.minister)
             }else binding.titleView.setText(R.string.pm)
 
-            var party=it.party
-
-            var partyRes: Int=partyStringToStringRes(party)
+            val party=it.party
+            val partyRes: Int=partyStringToStringRes(party)
 
             binding.partyNameView.setText(partyRes)
 
             binding.constituencyView.text = it.constituency
 
-            var rating=it.rating
+            val rating=it.rating
 
             //If the member has been rated, the rating bar is show with rating given.
             if(rating>0.0){
-                var ratingBar=binding.ratingBar
+                val ratingBar=binding.ratingBar
 
                 ratingBar.visibility=VISIBLE
 
                 ratingBar.setRating(rating)}
 
             //
-            var review=it.review
+            val review=it.review
             binding.ratingTextView.text = review
 
             //Glide used to set a picture of the member from an Url to the image view
-            var imageView=binding.memberFaceView
+            val imageView=binding.memberFaceView
 
-            var imgUrl="https://avoindata.eduskunta.fi/"+it.picture
+            val imgUrl="https://avoindata.eduskunta.fi/"+it.picture
 
             val imageUri=imgUrl.toUri().buildUpon().scheme("https").build()
 

@@ -24,14 +24,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 //List of objects observed from view model and passed to recycler view adapter. Menus created.
 
 class PartyFragment : Fragment() {
-    private lateinit var drawerLayout: DrawerLayout
 
     private lateinit var binding: FragmentPartyBinding
+
+    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding= DataBindingUtil.inflate(
             inflater, R.layout.fragment_party, container, false)
@@ -46,12 +47,12 @@ class PartyFragment : Fragment() {
         binding.partyViewModel= viewModel
 
         //Sets the bottom navigation bar
-        var bottomNavigationView: BottomNavigationView =binding.bottomNavigationView
-        val navCotroller=this.findNavController()
-        bottomNavigationView.setupWithNavController(navCotroller)
+        bottomNavigationView =binding.bottomNavigationView
+        val navController=this.findNavController()
+        bottomNavigationView.setupWithNavController(navController)
 
         //List of objects passed to recycler view adapter
-        var partyListData=mutableSetOf<PartyImageViewData>()
+        val partyListData=mutableSetOf<PartyImageViewData>()
 
         viewModel.partyList.observe(viewLifecycleOwner, Observer{ list ->
 
@@ -80,6 +81,7 @@ class PartyFragment : Fragment() {
             ) { item: PartyImageViewData -> recyclerViewItemClicked(item) }
 
         })
+
         setHasOptionsMenu(true)
 
         return binding.root

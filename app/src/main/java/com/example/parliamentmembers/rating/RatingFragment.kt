@@ -31,10 +31,12 @@ import com.example.parliamentmembers.utilities.InjectorUtils
 
 class RatingFragment : Fragment(), Functions {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    private lateinit var binding: FragmentRatingBinding
 
-        val binding: FragmentRatingBinding= DataBindingUtil.inflate(
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
+
+        binding= DataBindingUtil.inflate(
             inflater, R.layout.fragment_rating, container, false)
 
         binding.lifecycleOwner = this

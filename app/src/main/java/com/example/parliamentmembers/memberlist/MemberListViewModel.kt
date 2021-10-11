@@ -14,7 +14,7 @@ class MemberListViewModel(private val repository: Repository): ViewModel(){
 
     //Observes the method in repository, that shows all the parliament members in the database.
     //Sorts the objects by the last name of the member.
-    val parliamentMemberData= Transformations.map(repository.getAll()){
-        it.distinct().sortedBy { it.last_name }
+    var parliamentMemberData= Transformations.map(repository.getAll()){ list ->
+        list.distinct().sortedBy { it.last_name }
     }
 }
