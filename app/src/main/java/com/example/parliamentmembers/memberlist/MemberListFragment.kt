@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -32,13 +33,12 @@ class MemberListFragment : Fragment() {
         val binding: FragmentMemberListBinding =DataBindingUtil.inflate(
             inflater, R.layout.fragment_member_list, container, false)
 
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         //Sets the bottom navigation bar
         val navController=this.findNavController()
         var bottomNavigationView: BottomNavigationView =binding.bottomNavigationView
         bottomNavigationView.setupWithNavController(navController)
-
 
         val factory=InjectorUtils.memberListViewModelFactory()
 
@@ -63,8 +63,8 @@ class MemberListFragment : Fragment() {
 
             //Passes data to recycler view adapter, binds the view with the adapter
             binding.memberListRecycleView.layoutManager = manager
-            binding.memberListRecycleView.adapter = MemberListRecyclerViewAdapter(it,
-                { item: ParliamentMember -> recyclerViewItemClicked(item) })
+            binding.memberListRecycleView.adapter = MemberListRecyclerViewAdapter(it
+            ) { item: ParliamentMember -> recyclerViewItemClicked(item) }
         })
 
         return binding.root

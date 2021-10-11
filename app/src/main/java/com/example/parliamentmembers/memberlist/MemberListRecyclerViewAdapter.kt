@@ -27,11 +27,13 @@ class MemberListRecyclerViewAdapter(
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(parliamentMember: ParliamentMember, clickListener: (ParliamentMember) -> Unit) {
 
-            val firstNameView = itemView.findViewById<TextView>(R.id.memberFirstName)
-            firstNameView.setText(parliamentMember.first_name)
+            val firstNameView = itemView.findViewById<TextView>(R.id.memberNameFirst)
+            val firstName=parliamentMember.first_name
+            firstNameView.text = firstName
 
-            val lastNameView = itemView.findViewById<TextView>(R.id.memberLastName)
-            lastNameView.setText(parliamentMember.last_name)
+            val lastNameView=itemView.findViewById<TextView>(R.id.memberNameLast)
+            val lastName=parliamentMember.last_name
+            lastNameView.text=lastName
 
             val imageView=itemView.findViewById<ImageView>(R.id.memberImageView)
             var imgUrl="https://avoindata.eduskunta.fi/"+parliamentMember.picture

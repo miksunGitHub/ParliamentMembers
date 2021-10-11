@@ -2,6 +2,7 @@ package com.example.parliamentmembers.party
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -35,7 +36,7 @@ class PartyFragment : Fragment() {
         binding= DataBindingUtil.inflate(
             inflater, R.layout.fragment_party, container, false)
 
-        binding.setLifecycleOwner (this)
+        binding.lifecycleOwner = this
 
         val factory= InjectorUtils.partyViewModelFactory()
 
@@ -52,9 +53,9 @@ class PartyFragment : Fragment() {
         //List of objects passed to recycler view adapter
         var partyListData=mutableSetOf<PartyImageViewData>()
 
-        viewModel.partyList.observe(viewLifecycleOwner, Observer{
+        viewModel.partyList.observe(viewLifecycleOwner, Observer{ list ->
 
-            it.forEach(){
+            list.forEach(){
 
                 partyListData.add(it)
             }
@@ -75,8 +76,8 @@ class PartyFragment : Fragment() {
 
             //The list and the on click listener are passed to recycler view adapter
             binding.partyRecyclerView.layoutManager = LinearLayoutManager(view?.context)
-            binding.partyRecyclerView.adapter = PartyViewRecyclerViewAdapter(partyListDataToRecyclerView,
-                {item: PartyImageViewData -> recyclerViewItemClicked(item)})
+            binding.partyRecyclerView.adapter = PartyViewRecyclerViewAdapter(partyListDataToRecyclerView
+            ) { item: PartyImageViewData -> recyclerViewItemClicked(item) }
 
         })
         setHasOptionsMenu(true)
@@ -87,7 +88,7 @@ class PartyFragment : Fragment() {
     //Sets the options menu to the fragment
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.options_menu, menu)
+        inflater.inflate(R.menu.options_menu2, menu)
     }
 }
 

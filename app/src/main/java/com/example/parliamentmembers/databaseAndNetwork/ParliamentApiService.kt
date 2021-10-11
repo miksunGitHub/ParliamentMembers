@@ -10,7 +10,7 @@ import retrofit2.http.GET
 //Student ID: 2012950
 //Date: 11.10.2021
 //
-//Mostly copied from materials provided by Metropolia University of Applied Sciencies
+//Mostly copied from materials provided by Metropolia University of Applied Sciences
 
 private const val BASE_URL = "https://users.metropolia.fi/"
 

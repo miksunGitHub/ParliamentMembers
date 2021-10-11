@@ -36,9 +36,9 @@
     <string name="minister">Minister</string>
     <string name="pm">Member of Parliament</string>
     <string name="headline">Parliament of Finland</string>
-    <string name="find_a_member_by_name">Name: parliament member</string>
+    <string name="find_a_member_by_name">Name of the MP</string>
     <string name="parlament_logo">parlament logo</string>
-    <string name="find">Find</string>
+    <string name="find">Search</string>
     <string name="helsinki">Helsinki</string>
     <string name="uusimaa">Uusimaa</string>
     <string name="varsinais_suomi">Varsinais-Suomi</string>
@@ -56,6 +56,10 @@
     <string name="search_by_name">Search</string>
     <string name="parties">Parties</string>
     <string name="all_members">All members</string>
+    <string name="name">name</string>
+    <string name="const_member_lastname">constMemberLastName</string>
+
+
 
 
 </resources>

@@ -1,13 +1,19 @@
 package com.example.parliamentmembers.rating
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.fragment.findNavController
 import com.example.parliamentmembers.Functions
 import com.example.parliamentmembers.R
@@ -31,11 +37,11 @@ class RatingFragment : Fragment(), Functions {
         val binding: FragmentRatingBinding= DataBindingUtil.inflate(
             inflater, R.layout.fragment_rating, container, false)
 
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         //Gets the member ID from the safeArgs.
         val memberFragmentArgs= MemberFragmentArgs.fromBundle(requireArguments())
-        var memberID=memberFragmentArgs.memberID
+        val memberID=memberFragmentArgs.memberID
 
         //Creates a view model factory passing the member Id as a constructor parameter
         val factory=InjectorUtils.ratingViewModelFactory(memberID)
@@ -46,21 +52,30 @@ class RatingFragment : Fragment(), Functions {
         binding.saveButton.setOnClickListener {
             viewModel.getMemberByID(memberID.toLong()).observe(viewLifecycleOwner, Observer {
 
-                var previousReviews=it.review
+                val previousReviews=it.review
 
-                var currentReview=binding.rateMemberEditText.text.toString()
+                val currentReview=binding.rateMemberEditText.text.toString()
 
                 //If a review already exists in the database, the new review is added to it
                 //with 2 new line characters separating the reviews.
-                var review=concatenateReviews(previousReviews, currentReview)
+                val review=concatenateReviews(previousReviews, currentReview)
 
-                var rating=binding.ratingBar.rating
+                val rating=binding.ratingBar.rating
 
                 //parliment member object with the given rating and review attached
-                var updatedParliamentMember = ParliamentMember( memberID, it.member_num, it.first_name, it.last_name, it.age, it.party, it.constituency, it.minister, rating, review, it.picture)
+                val updatedParliamentMember = ParliamentMember( memberID, it.member_num,
+                        it.first_name, it.last_name, it.age, it.party, it.constituency,
+                        it.minister, rating, review, it.picture)
 
                 //View model function used to update the data in the database
                 viewModel.updateMember(updatedParliamentMember)
+
+                val editText=binding.rateMemberEditText
+
+                //Hide the keyboard
+                //https://www.codegrepper.com/code-examples/kotlin/hide+keyboard+in+fragment+android+kotlin
+                val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(editText.windowToken, 0)
 
                 //Navigates back to the member fragment passing member Id in the safeArgs.
                 this.findNavController().navigate(RatingFragmentDirections.actionRatingFragmentToMemberFragment(memberID))

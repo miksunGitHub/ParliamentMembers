@@ -7,7 +7,7 @@ import android.content.Context
 //Student ID: 2012950
 //Date: 11.10.2021
 //
-//Class copied from materials provided by Metropolia University of Applied Sciencies
+//Class copied from materials provided by Metropolia University of Applied Sciences
 
 class MyApp: Application() {
     companion object{

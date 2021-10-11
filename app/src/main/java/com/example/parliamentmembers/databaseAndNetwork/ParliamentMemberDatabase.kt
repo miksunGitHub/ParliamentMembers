@@ -9,7 +9,7 @@ import com.example.parliamentmembers.MyApp
 //Student ID: 2012950
 //Date: 11.10.2021
 //
-//Class mostly copied from materials provided by Metropolia University of Applied Sciencies
+//Class mostly copied from materials provided by Metropolia University of Applied Sciences
 
 @Database(entities=[ParliamentMember::class], version=3, exportSchema=false)
 abstract class ParliamentMemberDataBase: RoomDatabase() {

@@ -97,7 +97,7 @@ class Repository private constructor(private val parliamentMemberDao: Parliament
             try {
                 parliamentMemberDao.updateMember(parliamentMember)
             } catch (e: Exception) {
-                Log.d("?????????", e.toString())
+                Log.d("¤¤¤¤¤¤¤¤¤¤", e.toString())
             }
         }
     }

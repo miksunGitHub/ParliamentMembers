@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
                 R.layout.activity_main
         )
 
-        var drawerLayout=binding.drawerLayout
+        val drawerLayout=binding.drawerLayout
 
         val navController=this.findNavController(R.id.myNavHostFragment)
 

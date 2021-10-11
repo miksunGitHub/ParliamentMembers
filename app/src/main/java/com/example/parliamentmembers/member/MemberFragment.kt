@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -32,7 +33,7 @@ class MemberFragment : Fragment(), Functions {
         val binding:FragmentMemberBinding=DataBindingUtil.inflate(
             inflater, R.layout.fragment_member, container,false)
 
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         //The id of the member chosen in the previous fragment is gotten from the safeArgs.
         val memberFragmentArgs= MemberFragmentArgs.fromBundle(requireArguments())
@@ -48,13 +49,17 @@ class MemberFragment : Fragment(), Functions {
         //Observers the live data object in the view model, defines the contents of the view to
         //match the object
         viewModel.getMemberById.observe(viewLifecycleOwner, Observer{
-            binding.partyMemberFirstName.setText(it.first_name)
 
-            binding.partyMemberLastName.setText(it.last_name)
+            var name=it.first_name+" "+it.last_name
+
+            binding.partyMembersName.text =name
+
+            //The name of the member is added to the up bar
+            (activity as AppCompatActivity).supportActionBar?.title=name
 
             var ageText="Age: "+it.age
 
-            binding.ageView.setText(ageText)
+            binding.ageView.text = ageText
 
             var title=it.minister
 
@@ -69,7 +74,7 @@ class MemberFragment : Fragment(), Functions {
 
             binding.partyNameView.setText(partyRes)
 
-            binding.constituencyView.setText(it.constituency)
+            binding.constituencyView.text = it.constituency
 
             var rating=it.rating
 
@@ -83,7 +88,7 @@ class MemberFragment : Fragment(), Functions {
 
             //
             var review=it.review
-            binding.ratingTextView.setText(review)
+            binding.ratingTextView.text = review
 
             //Glide used to set a picture of the member from an Url to the image view
             var imageView=binding.memberFaceView

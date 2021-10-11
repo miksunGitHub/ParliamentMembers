@@ -12,38 +12,33 @@
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="3dp"
         android:layout_weight="0.5"
         android:contentDescription="@string/face_pic"
         app:srcCompat="@drawable/eduskunta" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/memberNameFirst"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:foregroundGravity="left|center_horizontal"
+        android:gravity="center|center_vertical"
+        android:text="@string/first"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
 
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/memberFirstName"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="0.5"
-            android:foregroundGravity="left|center_horizontal"
-            android:gravity="center_vertical|end"
-            android:padding="5dp"
-            android:text="@string/first"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/memberLastName"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:foregroundGravity="right"
-            android:gravity="start|center_vertical"
-            android:padding="5dp"
-            android:text="@string/last"
-            android:textSize="16sp" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/memberNameLast"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="5dp"
+        android:foregroundGravity="left|center_horizontal"
+        android:gravity="center"
+        android:text="@string/last"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
 
 </LinearLayout>

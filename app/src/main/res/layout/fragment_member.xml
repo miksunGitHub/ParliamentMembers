@@ -23,42 +23,11 @@
                 android:layout_height="match_parent">
 
 
-                <TextView
-                    android:id="@+id/partyMemberLastName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginTop="5dp"
-                    android:gravity="start|top"
-                    android:padding="5dp"
-                    android:text="@string/last"
-                    android:textSize="30sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/partyMemberFirstName"
-                    app:layout_constraintTop_toBottomOf="@+id/titleView" />
-
-                <TextView
-                    android:id="@+id/partyMemberFirstName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginTop="5dp"
-                    android:gravity="top|end"
-                    android:padding="5dp"
-                    android:text="@string/first"
-                    android:textSize="30sp"
-                    app:layout_constraintEnd_toStartOf="@+id/partyMemberLastName"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/titleView" />
-
                 <ImageView
                     android:id="@+id/memberFaceView"
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="20dp"
                     android:contentDescription="@string/face_pic"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.497"
@@ -92,18 +61,18 @@
                     android:id="@+id/ageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:text="@string/age"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/partyMemberFirstName" />
+                    app:layout_constraintTop_toBottomOf="@+id/partyMembersName" />
 
                 <RatingBar
                     android:id="@+id/ratingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="75dp"
+                    android:layout_marginTop="85dp"
                     android:isIndicator="true"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -126,9 +95,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:layout_marginTop="75dp"
+                    android:layout_marginTop="80dp"
                     android:layout_marginEnd="30dp"
                     android:inputType="textMultiLine"
+                    android:padding="5dp"
                     android:text="@string/rating"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -140,12 +110,24 @@
                     android:id="@+id/titleView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="@string/title"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/memberFaceView" />
+
+                <TextView
+                    android:id="@+id/partyMembersName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/name"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/titleView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

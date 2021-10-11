@@ -20,8 +20,8 @@ class PartyViewModel(private val repository: Repository): ViewModel(), Functions
         }
 
         //Transforms a list of live data strings into list of live data objects
-        val partyList=Transformations.map(repository.getParties()) {
-                it.distinct().map {
+        val partyList=Transformations.map(repository.getParties()) { list ->
+                list.distinct().map {
                         redefinePartyData(it)
                 }
         }
