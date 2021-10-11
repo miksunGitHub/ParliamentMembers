@@ -50,7 +50,7 @@ class PartyViewRecyclerViewAdapter(
 
             partyNameView.setText(item.partyName)
 
-            var imgUrl = "https://users.metropolia.fi/~a16002/pngs/" + item.partyLogo
+            val imgUrl = "https://users.metropolia.fi/~a16002/pngs/" + item.partyLogo
             val imageUri = imgUrl.toUri().buildUpon().scheme("https").build()
 
             Glide.with(partyLogoView.context)

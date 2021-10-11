@@ -38,14 +38,14 @@ class PartyMembersRecyclerViewAdapter(
 
         private val firstNameView = binding.partyMemberName
 
-        val imageView=binding.memberImageView
+        private val imageView=binding.memberImageView
 
         fun bind(item: ParliamentMember, clickListener: (ParliamentMember) -> Unit) {
 
             val name=item.first_name+" "+item.last_name
             firstNameView.text = name
 
-            var imgUrl="https://avoindata.eduskunta.fi/"+item.picture
+            val imgUrl="https://avoindata.eduskunta.fi/"+item.picture
             val imageUri=imgUrl.toUri().buildUpon().scheme("https").build()
 
             Glide.with(imageView.context)

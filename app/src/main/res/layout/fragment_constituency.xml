@@ -23,8 +23,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="30dp"
-                android:orientation="vertical">
+                android:layout_marginBottom="25dp"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
 
 
                 <TextView
@@ -111,8 +112,8 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="0.08"
                     android:gravity="center"
-                    android:textColor="@color/black"
                     android:text="@string/southeast_finland"
+                    android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
@@ -122,8 +123,8 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="0.08"
                     android:gravity="center"
-                    android:textColor="@color/black"
                     android:text="@string/savo_karelia"
+                    android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
@@ -133,8 +134,8 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="0.08"
                     android:gravity="center"
-                    android:textColor="@color/black"
                     android:text="@string/vaasa"
+                    android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
@@ -144,8 +145,8 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="0.08"
                     android:gravity="center"
-                    android:textColor="@color/black"
                     android:text="@string/central_finland"
+                    android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
@@ -155,8 +156,8 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="0.08"
                     android:gravity="center"
-                    android:textColor="@color/black"
                     android:text="@string/oulu"
+                    android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
@@ -166,8 +167,8 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="0.08"
                     android:gravity="center"
-                    android:textColor="@color/black"
                     android:text="@string/string_lapland"
+                    android:textColor="@color/black"
                     android:textSize="20sp" />
 
 

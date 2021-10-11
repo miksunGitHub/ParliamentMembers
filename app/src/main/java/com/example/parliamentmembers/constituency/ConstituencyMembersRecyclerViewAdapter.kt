@@ -45,7 +45,7 @@ class ConstituencyMembersRecyclerViewAdapter(
             val firstName = item.first_name + " " + item.last_name
             nameView.text = firstName
 
-            var imgUrl = "https://avoindata.eduskunta.fi/" + item.picture
+            val imgUrl = "https://avoindata.eduskunta.fi/" + item.picture
             val imageUri = imgUrl.toUri().buildUpon().scheme("https").build()
 
             Glide.with(imageView.context)

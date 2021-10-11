@@ -12,7 +12,7 @@ import com.example.parliamentmembers.databaseAndNetwork.*
 //using the repository and transformed into an object, that has parameters for the views
 //shown in the recycler view.
 
-class PartyViewModel(private val repository: Repository): ViewModel(), Functions {
+class PartyViewModel(repository: Repository): ViewModel(), Functions {
 
         //Data from the web server is fetched from the web server, when the view model is initialized
         init {

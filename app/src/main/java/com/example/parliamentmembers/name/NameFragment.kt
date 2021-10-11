@@ -1,10 +1,12 @@
 package com.example.parliamentmembers.name
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.net.toUri
@@ -54,7 +56,14 @@ class NameFragment : Fragment() {
 
         binding.findButton.setOnClickListener{
 
-            val name: String=binding.editTextTextPersonName.text.toString()
+            val editText=binding.editTextTextPersonName
+
+            //Hide the keyboard
+            //https://www.codegrepper.com/code-examples/kotlin/hide+keyboard+in+fragment+android+kotlin
+            val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(editText.windowToken, 0)
+
+            val name: String=editText.text.toString()
 
             //Splits the name given to a list
             val nameList=name.split(" ")

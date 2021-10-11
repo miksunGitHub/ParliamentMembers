@@ -57,7 +57,7 @@ class MemberListRecyclerViewAdapter(
             val lastName=item.last_name
             lastNameView.text=lastName
 
-            var imgUrl="https://avoindata.eduskunta.fi/"+item.picture
+            val imgUrl="https://avoindata.eduskunta.fi/"+item.picture
             val imageUri=imgUrl.toUri().buildUpon().scheme("https").build()
 
             Glide.with(imageView.context)

@@ -58,7 +58,7 @@
     <fragment
         android:id="@+id/memberListFragment"
         android:name="com.example.parliamentmembers.memberlist.MemberListFragment"
-        android:label="MemberListFragment" >
+        android:label="@string/headline">
         <action
             android:id="@+id/action_memberListFragment_to_memberFragment"
             app:destination="@id/memberFragment"

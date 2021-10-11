@@ -11,9 +11,9 @@ import com.example.parliamentmembers.databaseAndNetwork.Repository
 //View model for rating fragment. Delivers the functions to check the previously saved ratings and
 //to save the newly created data.
 
-class RatingViewModel(private val repository: Repository, memberId: Int): ViewModel() {
+class RatingViewModel(val repository: Repository, val memberId: Int): ViewModel() {
 
-    fun getMemberByID(id: Long)=repository.getMemberByID(id)
+    fun getMemberByID()=repository.getMemberByID(memberId.toLong())
 
     fun updateMember(parliamentMember: ParliamentMember)=repository.updateMember(parliamentMember)
 }

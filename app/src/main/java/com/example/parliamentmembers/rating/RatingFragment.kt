@@ -52,7 +52,7 @@ class RatingFragment : Fragment(), Functions {
             .get(RatingViewModel::class.java)
 
         binding.saveButton.setOnClickListener {
-            viewModel.getMemberByID(memberID.toLong()).observe(viewLifecycleOwner, Observer {
+            viewModel.getMemberByID().observe(viewLifecycleOwner, Observer {
 
                 val previousReviews=it.review
 
@@ -62,7 +62,11 @@ class RatingFragment : Fragment(), Functions {
                 //with 2 new line characters separating the reviews.
                 val review=concatenateReviews(previousReviews, currentReview)
 
-                val rating=binding.ratingBar.rating
+                val previousRating=it.rating
+
+                //Checks if there is a previous entry in the database
+                val rating=if(previousRating!=0f) {previousRating
+                }else{binding.ratingBar.rating}
 
                 //parliment member object with the given rating and review attached
                 val updatedParliamentMember = ParliamentMember( memberID, it.member_num,

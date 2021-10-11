@@ -16,6 +16,10 @@ import kotlinx.coroutines.launch
 
 class Repository private constructor(private val parliamentMemberDao: ParliamentMemberDao) {
 
+    private val _parliamentMemberData=MutableLiveData<List<ParliamentMemberJsonData>>()
+    private val parliamentMemberData: LiveData<List<ParliamentMemberJsonData>>
+        get()=_parliamentMemberData
+
     companion object {
         @Volatile
         private var instance: Repository? = null
@@ -30,15 +34,15 @@ class Repository private constructor(private val parliamentMemberDao: Parliament
     //Fetches json data from an outside source
     fun fetchData(viewModelScope: CoroutineScope) {
 
-        var parliamentMemberData = MutableLiveData<List<ParliamentMemberJsonData>>()
+        //val parliamentMemberData = MutableLiveData<List<ParliamentMemberJsonData>>()
 
         viewModelScope.launch {
             try {
-                parliamentMemberData.value = ParliamentApi.retrofitService.getProperties()
+                _parliamentMemberData.value = ParliamentApi.retrofitService.getProperties()
 
             } catch (e: Exception) {
 
-                parliamentMemberData.value = ArrayList()
+                _parliamentMemberData.value = ArrayList()
                 Log.d("¤¤¤¤¤¤¤¤¤¤", e.toString())
             }
             saveData(parliamentMemberData, viewModelScope)
@@ -47,19 +51,19 @@ class Repository private constructor(private val parliamentMemberDao: Parliament
 
     //Gets a json object, saves the wanted data from it to a parliament member object. Adds the
     //object to the database.
-    fun saveData(data: LiveData<List<ParliamentMemberJsonData>>, viewModelScope: CoroutineScope) {
+    private fun saveData(data: LiveData<List<ParliamentMemberJsonData>>, viewModelScope: CoroutineScope) {
 
         data.value?.forEach {
-            var personNumber = it.personNumber
-            var firstName = it.first
-            var lastName = it.last
-            var age = 2020 - it.bornYear
-            var constituency = it.constituency
-            var party = it.party
-            var minister = it.minister
-            var picture = it.picture
+            val personNumber = it.personNumber
+            val firstName = it.first
+            val lastName = it.last
+            val age = 2020 - it.bornYear
+            val constituency = it.constituency
+            val party = it.party
+            val minister = it.minister
+            val picture = it.picture
 
-            var parliamentMember = ParliamentMember(member_num = personNumber, first_name = firstName, last_name = lastName, age = age, party = party, constituency = constituency, minister = minister, rating = 0f, review = "", picture = picture)
+            val parliamentMember = ParliamentMember(member_num = personNumber, first_name = firstName, last_name = lastName, age = age, party = party, constituency = constituency, minister = minister, rating = 0f, review = "", picture = picture)
 
             viewModelScope.launch {
                 try {
@@ -84,7 +88,7 @@ class Repository private constructor(private val parliamentMemberDao: Parliament
     //Get all entries matching the party given
     fun getMembersByParty(party: String)=parliamentMemberDao.getMembersByParty(party)
 
-    //Get all entries mathing the constituency given
+    //Get all entries matching the constituency given
     fun getMembersByConstituency(constituency: String) = parliamentMemberDao.getMembersByConstituency(constituency)
 
     //Get an entry, that matches with the first and last name given
